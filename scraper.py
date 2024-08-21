@@ -3,16 +3,13 @@ import pwinput
 from keycloak import KeycloakOpenID
 import pandas
 import sqlalchemy
+from key_configs import keycloak_url, realm_name, client_id, client_secret, login_url, user_url
 import pdb; pdb.set_trace()
 #Session start. Cookie persistence
 session = requests.Session()
 
 
-#Keycloak configs
-keycloak_url = ''
-realm_name = ''
-client_id = ''
-client_secret = ''
+
 
 #initializing keycloakOpenID instance
 keycloak_openid = KeycloakOpenID(server_url=keycloak_url,
@@ -28,7 +25,7 @@ password = pwinput.pwinput(prompt="password:", mask='')
 
 token = keycloak_openid.token(username, password)
 #login endpoint and token handling
-login_url = '...'
+
 headers = {'Authorization': f'Bearer {token['access token']}'}
 
 response = session.get(login_url, headers=headers)
@@ -43,7 +40,7 @@ else:
     print(f"Error: {response.status_code}")
     print(response.text)
 
-#users_url = '...'
+
 
 
 
